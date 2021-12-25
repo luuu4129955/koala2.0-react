@@ -90,7 +90,8 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.19",
-    "svg-sprite-loader": "^6.0.11"
+    "svg-sprite-loader": "^6.0.11",
+    "svgo-loader": "^3.0.0"
   },
   "jest": {
     "roots": [

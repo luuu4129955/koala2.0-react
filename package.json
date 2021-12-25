@@ -89,7 +89,8 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.19"
+    "@types/styled-components": "^5.1.19",
+    "svg-sprite-loader": "^6.0.11"
   },
   "jest": {
     "roots": [

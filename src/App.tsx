@@ -1,3 +1,4 @@
+import Nav from 'components/Nav';
 import React from 'react';
 import {Routes, Route, Link, Outlet} from 'react-router-dom';
 import styled from 'styled-components';
@@ -11,20 +12,6 @@ const Wrapper = styled.div`
 
 const Main = styled.div`
   flex-grow: 1;
-`;
-
-const Nav = styled.div`
-  border: 1px solid red;
-
-  > ul {
-    display: flex;
-
-    > li {
-      width: 33.3333%;
-      text-align: center;
-      padding: 16px;
-    }
-  }
 `;
 
 export default function App() {
@@ -49,13 +36,7 @@ function Layout() {
   return (
     <>
       <Outlet/>
-      <Nav>
-        <ul>
-          <li><Link to="/labels">标签</Link></li>
-          <li><Link to="/money">记账</Link></li>
-          <li><Link to="/statistics">统计</Link></li>
-        </ul>
-      </Nav>
+      <Nav />
     </>
   );
 }

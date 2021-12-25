@@ -1870,6 +1870,11 @@
   resolved "https://registry.npmmirror.com/@types/trusted-types/download/@types/trusted-types-2.0.2.tgz#fc25ad9943bcac11cceb8168db4f275e0e72e756"
   integrity sha1-/CWtmUO8rBHM64Fo208nXg5y51Y=
 
+"@types/webpack-env@1.15.1":
+  version "1.15.1"
+  resolved "https://registry.npmmirror.com/@types/webpack-env/download/@types/webpack-env-1.15.1.tgz#c8e84705e08eed430b5e15b39c65b0944e4d1422"
+  integrity sha1-yOhHBeCO7UMLXhWznGWwlE5NFCI=
+
 "@types/ws@^8.2.2":
   version "8.2.2"
   resolved "https://registry.npmmirror.com/@types/ws/download/@types/ws-8.2.2.tgz#7c5be4decb19500ae6b3d563043cd407bf366c21"

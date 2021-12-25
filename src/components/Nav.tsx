@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-require('assets/icons/money.svg')
+import {Link} from 'react-router-dom';
+import styled from 'styled-components';
+import Icon from './Icon';
 
 const NavWrapper = styled.div`
   line-height: 24px;
-  box-shadow: 0 0 3px rgba(0, 0,0, 0.25);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
 
   > ul {
     display: flex;
@@ -12,24 +12,32 @@ const NavWrapper = styled.div`
     > li {
       width: 33.3333%;
       text-align: center;
-      padding: 16px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      > .icon {
+      }
     }
   }
 `;
 
-const Nav=()=>{
-  return(
+const Nav = () => {
+  return (
     <NavWrapper>
-    <ul>
-      <li>
-        <svg>
-          <use xlinkHref="#money"></use>
-        </svg>
-        <Link to="/labels">标签</Link></li>
-      <li><Link to="/money">记账</Link></li>
-      <li><Link to="/statistics">统计</Link></li>
-    </ul>
+      <ul>
+        <li>
+          <Icon name="label"/>
+          <Link to="/labels">标签</Link></li>
+        <li>
+          <Icon name="money"/>
+          <Link to="/money">记账</Link></li>
+        <li>
+          <Icon name="statistics"/>
+          <Link to="/statistics">统计</Link></li>
+      </ul>
     </NavWrapper>
-  )
-}
-export default Nav
+  );
+};
+export default Nav;

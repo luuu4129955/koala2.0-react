@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const FormItem = () => {
   return (
     <FormItemSection>
-        备注：<input/>
+      备注：<input/>
     </FormItemSection>
   );
 };

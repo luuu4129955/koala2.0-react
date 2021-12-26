@@ -3,6 +3,7 @@ import {useState} from 'react';
 import styled from 'styled-components';
 import "lib/constant"
 import defaultTags from 'lib/constant';
+import createId from 'lib/createdId';
 
 type Tag = {
   id: string,
@@ -10,8 +11,18 @@ type Tag = {
 }
 const Tags: React.FC = () => {
   const [tags, setTags] = useState<Tag[]>(defaultTags);
+  const id=createId().toString()
+  const [myTags,setMyTags]=useState<Tag[]>([{id:'',name:''}])
   const onAddTag = () => {
-    const newTag=window.prompt('要添加的标签名为：')
+    const myNewTag=window.prompt('请输入标签名：')
+    console.log(myNewTag);
+    if(!myNewTag){
+      return window.prompt('标签名不能为空！')
+    }else if(myNewTag.length>4){
+      return window.prompt('标签名最长4个字符')
+    }
+    setMyTags([...myTags,{id,name:myNewTag}])
+    console.log(myTags);
   }
   return (
     <TagsWraper>
@@ -22,6 +33,12 @@ const Tags: React.FC = () => {
             <Icon name={tag.id}/>
             <span>{tag.name}</span>
           </li>)}
+        {myTags.map(tag=>
+          <li key={tag.id}>
+            <Icon name={tag.id}/>
+            <span>{tag.name}</span>
+          </li>
+        )}
         <li onClick={onAddTag}><Icon name="add"/><span>自定义</span></li>
       </ul>
     </TagsWraper>

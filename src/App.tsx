@@ -1,7 +1,7 @@
 import Layout from 'components/Layout';
 import Nav from 'components/Nav';
 import React from 'react';
-import {Routes, Route, Link, Outlet} from 'react-router-dom';
+import {Routes, Route} from 'react-router-dom';
 import styled from 'styled-components';
 import Money from 'views/Money';
 import NoMatch from 'views/NoMatch';
@@ -17,10 +17,8 @@ export default function App() {
           <Route path="money" element={<Money/>}/>
           <Route path="labels" element={<Tags/>}/>
           <Route path="statistics" element={<Statistics/>}/>
+          <Route path="*" element={<NoMatch path="*"/>}/>
         </Route>
-      </Routes>
-      <Routes>
-        <Route path="*" element={<NoMatch/>}/>
       </Routes>
     </div>
   );

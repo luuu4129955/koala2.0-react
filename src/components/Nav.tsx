@@ -2,6 +2,31 @@ import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from './Icon';
 
+const Nav = () => {
+  return (
+    <NavWrapper>
+      <ul>
+        <li>
+          <NavLink to="/labels">
+            <Icon name="label"/>
+            标签</NavLink>
+        </li>
+        <li>
+          <NavLink to="/money">
+            <Icon name="money"/>
+            记账</NavLink>
+        </li>
+        <li>
+          <NavLink to="/statistics">
+            <Icon name="statistics"/>
+            统计</NavLink>
+        </li>
+      </ul>
+    </NavWrapper>
+  );
+};
+export default Nav;
+
 const NavWrapper = styled.div`
   line-height: 24px;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
@@ -37,28 +62,3 @@ const NavWrapper = styled.div`
     }
   }
 `;
-
-const Nav = () => {
-  return (
-    <NavWrapper>
-      <ul>
-        <li>
-          <NavLink to="/labels">
-            <Icon name="label"/>
-            标签</NavLink>
-        </li>
-        <li>
-          <NavLink to="/money">
-            <Icon name="money"/>
-            记账</NavLink>
-        </li>
-        <li>
-          <NavLink to="/statistics">
-            <Icon name="statistics"/>
-            统计</NavLink>
-        </li>
-      </ul>
-    </NavWrapper>
-  );
-};
-export default Nav;

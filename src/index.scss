@@ -4,14 +4,38 @@
 *{box-sizing: border-box}
 *::before{box-sizing: border-box}
 *::after{box-sizing: border-box}
-ul,ol{list-style: none}
-a{text-decoration: none;color: inherit}
+*{letter-spacing: 2px}
+ul,ol>li{list-style: none}
+a{
+  text-decoration: none;
+  &:visited{
+    color: inherit;
+  }
+}
 body{
   font-family:$font-hei;
+  background-color: #f5f8fd;
   font-size: 16px;
   line-height: 1.2;
 }
 .icon{
   width: 1em;
   height: 1em;
+}
+button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+input{
+  outline: none;
+  border: 0;
+  background-color: inherit;
+  caret-color:#a1dd9d;
+}
+li{
+  list-style: none;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight: normal;
 }

@@ -1,7 +1,7 @@
 import Icon from 'components/Icon';
 import {useState} from 'react';
 import styled from 'styled-components';
-import "lib/constant"
+import 'lib/constant';
 import defaultTags from 'lib/constant';
 import createId from 'lib/createdId';
 
@@ -11,29 +11,37 @@ type Tag = {
 }
 const Tags: React.FC = () => {
   const [tags, setTags] = useState<Tag[]>(defaultTags);
-  const id=createId().toString()
-  const [myTags,setMyTags]=useState<Tag[]>([{id:'',name:''}])
+  const id = createId().toString();
+  const [myTags, setMyTags] = useState<Tag[]>([{id: '', name: ''}]);
+  const [selectedTag, setSeletedTag] = useState<Tag>({id:"foods",name:"餐饮"});
   const onAddTag = () => {
-    const myNewTag=window.prompt('请输入标签名：')
+    const myNewTag = window.prompt('请输入标签名：');
     console.log(myNewTag);
-    if(!myNewTag){
-      return window.prompt('标签名不能为空！')
-    }else if(myNewTag.length>4){
-      return window.prompt('标签名最长4个字符')
+    if (!myNewTag) {
+      return window.prompt('标签名不能为空！');
+    } else if (myNewTag.length > 4) {
+      return window.prompt('标签名最长4个字符');
     }
-    setMyTags([...myTags,{id,name:myNewTag}])
+    setMyTags([...myTags, {id, name: myNewTag}]);
     console.log(myTags);
-  }
+  };
+  const onSelectTag = (tag: Tag) => {
+    console.log('执行了');
+    setSeletedTag(tag)
+    console.log(selectedTag);
+  };
   return (
     <TagsWraper>
       <ul>
         {/*这里icon占位了但是显示不出来*/}
         {tags.map(tag =>
-          <li key={tag.id}>
+          <li key={tag.id} onClick={() => onSelectTag(tag)}
+              className={tag.name===selectedTag.name?'selected':''}
+          >
             <Icon name={tag.id}/>
             <span>{tag.name}</span>
           </li>)}
-        {myTags.map(tag=>
+        {myTags.map(tag =>
           <li key={tag.id}>
             <Icon name={tag.id}/>
             <span>{tag.name}</span>

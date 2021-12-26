@@ -1,4 +1,7 @@
-// @ts-ignore
+type Tag = {
+  id: string,
+  name: string
+}
 const defaultTags: Tag[] = [
   {id: 'foods', name: '餐饮'},
   {id: 'athletics', name: '运动'},

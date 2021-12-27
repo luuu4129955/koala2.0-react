@@ -26,9 +26,7 @@ const Tags: React.FC = () => {
     console.log(myTags);
   };
   const onSelectTag = (tag: Tag) => {
-    console.log('执行了');
     setSeletedTag(tag)
-    console.log(selectedTag);
   };
   return (
     <TagsWraper>

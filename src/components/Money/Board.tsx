@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import styled from 'styled-components';
 import {BoardSection} from './Board/BoardSection'
 import {calculateOutput} from './Board/calculateOutput'
 

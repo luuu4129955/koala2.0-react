@@ -1,8 +1,6 @@
 import Layout from 'components/Layout';
-import Nav from 'components/Nav';
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
-import styled from 'styled-components';
 import Money from 'views/Money';
 import NoMatch from 'views/NoMatch';
 import Statistics from 'views/Statistics';

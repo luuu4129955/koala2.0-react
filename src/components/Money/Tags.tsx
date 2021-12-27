@@ -10,7 +10,7 @@ type Tag = {
   name: string
 }
 const Tags: React.FC = () => {
-  const [tags, setTags] = useState<Tag[]>(defaultTags);
+  const [tags] = useState<Tag[]>(defaultTags);
   const id = createId().toString();
   const [myTags, setMyTags] = useState<Tag[]>([{id: '', name: ''}]);
   const [selectedTag, setSeletedTag] = useState<Tag>({id:"foods",name:"餐饮"});

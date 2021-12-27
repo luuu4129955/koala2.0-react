@@ -1,21 +1,29 @@
-import styled from "styled-components";
+import {useState} from 'react';
+import styled from 'styled-components';
 
-const Tabs = () => {
+const Tabs: React.FC = () => {
+  const tabTextMap = {'-': '支出', '+': '收入'};
+  type keys=keyof typeof tabTextMap
+  const [tabTextList] = useState<keys[]>(['-', '+']);
+  const [tabText, setTabText] = useState('-');
   return (
     <>
       <TabsSection>
-          <ul>
-            <li className="selected">支出</li>
-            <li>收入</li>
-          </ul>
+        <ul>
+          {tabTextList.map(t =>
+            <li key={t} className={tabText === t ? 'selected' : ''}
+                onClick={() => setTabText(t)}
+            >{tabTextMap[t]}
+            </li>)}
+        </ul>
       </TabsSection>
     </>
   );
 };
 
-export default Tabs
+export default Tabs;
 
-const TabsSection=styled.section`
+const TabsSection = styled.section`
   ul {
     display: flex;
     flex-direction: row;
@@ -41,4 +49,9 @@ const TabsSection=styled.section`
       }
     }
   }
-`
+`;
+
+function usaState(): [any, any] {
+  throw new Error('Function not implemented.');
+}
+

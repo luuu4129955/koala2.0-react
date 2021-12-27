@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 const Board: React.FC = () => {
   const [output, setOutput] = useState<string>('0');
-  const x = (e: React.MouseEvent) => {
+  const onClickNumber = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
-    console.log(text);
     if (text === null) return;
+    else if(output.length>=16)return;
     switch (text) {
       case '0':
       case '1':
@@ -18,31 +18,36 @@ const Board: React.FC = () => {
       case '7':
       case '8':
       case '9':
-      case '.':
         if (output === '0') {
           setOutput(text);
         } else {
           setOutput(output + text);
         }
         break;
-      case '删除':
-        console.log('删除');
+      case '.':
+        if (output.indexOf('.') > 0) {
+          return;
+        }
+        setOutput(output + '.');
         break;
-      case '清空':
-        console.log('清空');
-        break;
-      case 'OK':
-        console.log('确认');
-        break;
-
     }
   };
+  const backspace = () => {
+    if (output.length === 1) {
+      setOutput('0');
+    } else {
+      setOutput(output.slice(0, -1));
+    }
+  }
+  const clear = () => {
+    setOutput('0')
+  }
   return (
     <>
       <BoardSection>
         <div className="board-output">{output}</div>
         <div className="board-input">
-          <div className="numbers" onClick={x}>
+          <div className="numbers" onClick={onClickNumber}>
             <button>1</button>
             <button>2</button>
             <button>3</button>
@@ -56,8 +61,8 @@ const Board: React.FC = () => {
             <button className="zero">0</button>
           </div>
           <div className="result">
-            <button className="clear">清空</button>
-            <button className="back">删除</button>
+            <button className="clear" onClick={clear}>清空</button>
+            <button className="back" onClick={backspace}>删除</button>
             <button className="ok">OK</button>
           </div>
         </div>

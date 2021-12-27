@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Tabs: React.FC = () => {
   const tabTextMap = {'-': '支出', '+': '收入'};
   type keys=keyof typeof tabTextMap
-  const [tabTextList] = useState<keys[]>(['-', '+']);
+  const tabTextList:keys[] = ['-', '+'];
   const [tabText, setTabText] = useState('-');
   return (
     <>
@@ -51,7 +51,4 @@ const TabsSection = styled.section`
   }
 `;
 
-function usaState(): [any, any] {
-  throw new Error('Function not implemented.');
-}
 

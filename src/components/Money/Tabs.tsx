@@ -1,18 +1,23 @@
 import {useState} from 'react';
 import styled from 'styled-components';
+type Props={
+  value:string,
+  onChange:(value:'-'|'+')=>void
+}
 
-const Tabs: React.FC = () => {
+const Tabs: React.FC<Props> = (props) => {
   const tabTextMap = {'-': '支出', '+': '收入'};
   type keys=keyof typeof tabTextMap
   const tabTextList:keys[] = ['-', '+'];
-  const [tabText, setTabText] = useState('-');
+  // const [tabText, setTabText] = useState('-');
+
   return (
     <>
       <TabsSection>
         <ul>
           {tabTextList.map(t =>
-            <li key={t} className={tabText === t ? 'selected' : ''}
-                onClick={() => setTabText(t)}
+            <li key={t} className={props.value === t ? 'selected' : ''}
+                onClick={() => props.onChange(t)}
             >{tabTextMap[t]}
             </li>)}
         </ul>

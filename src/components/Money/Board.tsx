@@ -2,24 +2,29 @@ import {useState} from 'react';
 import {BoardSection} from './Board/BoardSection';
 import {calculateOutput} from './Board/calculateOutput';
 
-const Board: React.FC = () => {
+type Props={
+  value:string,
+  onChange:(output:string)=>void
+}
+
+const Board: React.FC<Props> = (props) => {
   const numbesList = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '.'];
-  const [output, setOutput] = useState('0');
+  const output=props.value
   const onClickNumber = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) return;
     else if (output.length >= 16) return;
-    setOutput(calculateOutput(text, output));
+    props.onChange(calculateOutput(text, output));
   };
   const backspace = () => {
     if (output.length === 1) {
-      setOutput('0');
+      props.onChange('0');
     } else {
-      setOutput(output.slice(0, -1));
+      props.onChange(output.slice(0, -1));
     }
   };
   const clear = () => {
-    setOutput('0');
+    props.onChange('0');
   };
   return (
     <>

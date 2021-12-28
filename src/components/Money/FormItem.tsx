@@ -1,12 +1,16 @@
-import { useRef, useState } from 'react';
+import {useRef, useState} from 'react';
 import styled from 'styled-components';
 
-const FormItem: React.FC = () => {
-  const [note,setNote]=useState('')
-  const refInput=useRef<HTMLInputElement>(null)
+type Props = {
+  value: string,
+  onChange: (value:string) => void
+}
+const FormItem: React.FC<Props> = (props) => {
+  const note=props.value
+  const refInput = useRef<HTMLInputElement>(null);
   const onBlur = () => {
-    if (refInput.current!==null){
-      setNote(refInput.current.value)
+    if (refInput.current !== null) {
+      props.onChange(refInput.current.value);
     }
   };
 

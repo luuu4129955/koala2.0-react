@@ -9,11 +9,14 @@ type Tag = {
   id: string,
   name: string
 }
-const Tags: React.FC = () => {
+type Props={
+  value:Tag,
+  onChange:(value:Tag)=>void
+}
+const Tags: React.FC<Props> = (props) => {
   const [tags] = useState<Tag[]>(defaultTags);
   const id = createId().toString();
   const [myTags, setMyTags] = useState<Tag[]>([{id: '', name: ''}]);
-  const [selectedTag, setSeletedTag] = useState<Tag>({id:"foods",name:"餐饮"});
   const onAddTag = () => {
     const myNewTag = window.prompt('请输入标签名：');
     console.log(myNewTag);
@@ -26,7 +29,7 @@ const Tags: React.FC = () => {
     console.log(myTags);
   };
   const onSelectTag = (tag: Tag) => {
-    setSeletedTag(tag)
+    props.onChange(tag)
   };
   return (
     <TagsWraper>
@@ -34,14 +37,16 @@ const Tags: React.FC = () => {
         {/*这里icon占位了但是显示不出来*/}
         {tags.map(tag =>
           <li key={tag.id} onClick={() => onSelectTag(tag)}
-              className={tag.name===selectedTag.name?'selected':''}
+              className={tag.name===props.value.name?'selected':''}
           >
             <Icon name={tag.id}/>
             <span>{tag.name}</span>
           </li>)}
         {myTags.map(tag =>
-          <li key={tag.id}>
-            <Icon name={tag.id}/>
+          <li key={tag.id} onClick={() => onSelectTag(tag)}
+              className={tag.name===props.value.name?'selected':''}
+          >
+            <Icon name="myCreate"/>
             <span>{tag.name}</span>
           </li>
         )}

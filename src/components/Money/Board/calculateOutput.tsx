@@ -16,7 +16,7 @@ const calculateOutput = (text: string, output: string) => {
         return output + text;
       }
     case '.':
-      if (output.indexOf('.') >= 0) {
+      if (output.indexOf('.') > 0) {
         return output;
       }
       return output + '.';

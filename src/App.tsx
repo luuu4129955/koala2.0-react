@@ -13,7 +13,7 @@ export default function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Money/>}/>
           <Route path="money" element={<Money/>}/>
-          <Route path="labels" element={<Tags/>}/>
+          <Route path="tags" element={<Tags/>}/>
           <Route path="statistics" element={<Statistics/>}/>
           <Route path="*" element={<NoMatch path="*"/>}/>
         </Route>

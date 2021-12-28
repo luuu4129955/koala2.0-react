@@ -7,7 +7,7 @@ const Nav = () => {
     <NavWrapper>
       <ul>
         <li>
-          <NavLink to="/labels">
+          <NavLink to="/tags">
             <Icon name="label"/>
             标签</NavLink>
         </li>

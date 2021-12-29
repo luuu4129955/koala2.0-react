@@ -2,22 +2,16 @@ import {useRef, useState} from 'react';
 import styled from 'styled-components';
 
 type Props = {
-  value: string,
-  onChange: (value:string) => void
-}
-const FormItem: React.FC<Props> = (props) => {
-  const note=props.value
-  const refInput = useRef<HTMLInputElement>(null);
-  const onBlur = () => {
-    if (refInput.current !== null) {
-      props.onChange(refInput.current.value);
-    }
-  };
+  text: string,
+} & React.InputHTMLAttributes<HTMLInputElement>
 
-  return (
+const FormItem: React.FC<Props> = (props) => {
+  const {text, value, onChange, ...rest} = props;
+  const refInput = useRef<HTMLInputElement>(null);
+   return (
     <FormItemSection>
-      备注：<input type="text" placeholder="在这里添加备注~"
-                ref={refInput} onBlur={onBlur}/>
+      {text}
+      <input {...rest} ref={refInput} />
     </FormItemSection>
   );
 };

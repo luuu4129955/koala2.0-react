@@ -1,5 +1,4 @@
 import { ChangeEventHandler } from 'react';
-import styled from 'styled-components';
 import FormItem from './FormItem';
 
 type Props={
@@ -18,9 +17,4 @@ const Note: React.FC<Props> = (props) => {
   );
 };
 
-const Wrapper = styled.section`
-  padding: 10px 10px;
-  display: flex;
-  align-items: center;
-`;
 export {Note};

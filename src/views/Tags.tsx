@@ -5,7 +5,7 @@ import {Button} from 'components/Button';
 import { Link } from 'react-router-dom';
 
 function Tags() {
-  const {myTags, setMyTags} = useTags();
+  const {myTags} = useTags();
   return (
     <TagsSection>
       <div className="topNav">我的自定义标签</div>

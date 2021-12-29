@@ -1,5 +1,5 @@
 import Board from 'components/Money/Board';
-import FormItem from 'components/Money/FormItem';
+import {Note} from 'components/Money/Note';
 import Tabs from 'components/Money/Tabs';
 import Tags from 'components/Money/Tags';
 import {useState} from 'react';
@@ -19,7 +19,7 @@ function Money() {
   return (
     <>
       <Tags value={record.tag} onChange={tag => onChange({tag})}></Tags>
-      <FormItem value={record.note} onChange={note => onChange({note})}></FormItem>
+      <Note value={record.note} onChange={note => onChange({note})}></Note>
       <Tabs value={record.category} onChange={category => onChange({category})}></Tabs>
       <Board value={record.amount} onChange={amount => onChange({amount})}></Board>
     </>

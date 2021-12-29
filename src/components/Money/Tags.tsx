@@ -9,27 +9,33 @@ type Tag = {
   id: string,
   name: string
 }
-type Props={
-  value:Tag,
-  onChange:(value:Tag)=>void
+type Props = {
+  value: Tag,
+  onChange: (value: Tag) => void
 }
 const Tags: React.FC<Props> = (props) => {
   const [tags] = useState<Tag[]>(defaultTags);
   const id = createId().toString();
-  const [myTags, setMyTags] = useState<Tag[]>([{id: '', name: ''}]);
+  const [myTags, setMyTags] = useState<Tag[]>([]);
   const onAddTag = () => {
-    const myNewTag = window.prompt('请输入标签名：');
+    let myNewTag: Tag = {id: '', name: ''};
+    const text = window.prompt('请输入标签名：');
+    if (text !== null) {
+      myNewTag.name = text;
+      myNewTag.id = id;
+    }
+    ;
     console.log(myNewTag);
     if (!myNewTag) {
       return window.prompt('标签名不能为空！');
-    } else if (myNewTag.length > 4) {
+    } else if (myNewTag.name.length > 4) {
       return window.prompt('标签名最长4个字符');
     }
-    setMyTags([...myTags, {id, name: myNewTag}]);
+    setMyTags([...myTags, {id, name: myNewTag.name}]);
     console.log(myTags);
   };
   const onSelectTag = (tag: Tag) => {
-    props.onChange(tag)
+    props.onChange(tag);
   };
   return (
     <TagsWraper>
@@ -37,14 +43,14 @@ const Tags: React.FC<Props> = (props) => {
         {/*这里icon占位了但是显示不出来*/}
         {tags.map(tag =>
           <li key={tag.id} onClick={() => onSelectTag(tag)}
-              className={tag.name===props.value.name?'selected':''}
+              className={tag.name === props.value.name ? 'selected' : ''}
           >
             <Icon name={tag.id}/>
             <span>{tag.name}</span>
           </li>)}
         {myTags.map(tag =>
           <li key={tag.id} onClick={() => onSelectTag(tag)}
-              className={tag.name===props.value.name?'selected':''}
+              className={tag.name === props.value.name ? 'selected' : ''}
           >
             <Icon name="myCreate"/>
             <span>{tag.name}</span>

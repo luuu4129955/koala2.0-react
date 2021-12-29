@@ -1,44 +1,43 @@
 import Icon from 'components/Icon';
 import styled from 'styled-components';
 import {useTags} from 'useTags';
-import {Button} from 'components/Button'
+import {Button} from 'components/Button';
+import { Link } from 'react-router-dom';
 
 function Tags() {
-  //这里的myTags没有创建 因此为空 先把样式写死
-  //等把数据存到localstorage再说
   const {myTags, setMyTags} = useTags();
   return (
     <TagsSection>
       <div className="topNav">我的自定义标签</div>
       <ul className="tag-list">
         {myTags.map(t => <li key={t.id}>{t.name}</li>)}
-        <li className="tag">
+        <Link to="naicha"><li className="tag">
           <span>奶茶</span>
-        <Icon name="edit"></Icon>
+          <Icon name="edit"></Icon>
         </li>
+        </Link>
       </ul>
       <Button name="新增标签"></Button>
     </TagsSection>
   );
 }
 
-const TagsSection=styled.section`
-  .btn{
-    background-color: #ffb850;
-  }
+const TagsSection = styled.section`
+  
   .topNav {
     background-color: #a1dd9d;
     color: #fff;
-    padding: 12px 0;
-    font-size: 20px;
+    padding: 21.6px 18px;
+    font-size: 18px;
     text-align: center;
     position: fixed;
     top: 0;
     width: 100%;
   }
+
   .tag-list {
     background-color: #fff;
-    margin-top: 50.4px;
+    margin-top: 64.8px;
 
     .tag {
       display: flex;
@@ -59,8 +58,8 @@ const TagsSection=styled.section`
         fill: #a1dd9d
       }
     }
-    
+
   }
-`
+`;
 
 export default Tags;

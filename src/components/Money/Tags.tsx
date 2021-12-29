@@ -1,9 +1,9 @@
 import Icon from 'components/Icon';
-import {useState} from 'react';
+import { useState} from 'react';
 import styled from 'styled-components';
 import 'lib/constant';
 import defaultTags from 'lib/constant';
-import createId from 'lib/createdId';
+import { useTags } from 'useTags';
 
 type Tag = {
   id: string,
@@ -15,25 +15,7 @@ type Props = {
 }
 const Tags: React.FC<Props> = (props) => {
   const [tags] = useState<Tag[]>(defaultTags);
-  const id = createId().toString();
-  const [myTags, setMyTags] = useState<Tag[]>([]);
-  const onAddTag = () => {
-    let myNewTag: Tag = {id: '', name: ''};
-    const text = window.prompt('请输入标签名：');
-    if (text !== null) {
-      myNewTag.name = text;
-      myNewTag.id = id;
-    }
-    ;
-    console.log(myNewTag);
-    if (!myNewTag) {
-      return window.prompt('标签名不能为空！');
-    } else if (myNewTag.name.length > 4) {
-      return window.prompt('标签名最长4个字符');
-    }
-    setMyTags([...myTags, {id, name: myNewTag.name}]);
-    console.log(myTags);
-  };
+  const {myTags,onFetchTags, onAddTag, onSaveTag, onRemoveTag} = useTags()
   const onSelectTag = (tag: Tag) => {
     props.onChange(tag);
   };

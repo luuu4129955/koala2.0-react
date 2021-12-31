@@ -44,15 +44,15 @@ const useTags = () => {
       myNewTag.id = id;
     }
     ;
-    console.log(myNewTag);
     if (!myNewTag) {
       return window.prompt('标签名不能为空！');
-    } else if (myNewTag.name.length > 4) {
+    } else if (myTags.map(t=>t.name).indexOf(myNewTag.name)>=0){
+      return window.alert('标签名重复了')
+    }else if (myNewTag.name.length > 4) {
       return window.prompt('标签名最长4个字符!');
     }
     setMyTags([...myTags, {id, name: myNewTag.name}]);
     onSaveTag();
-    console.log(myTags);
   };
 
   return {myTags, setMyTags, onFetchTags, onAddTag, onSaveTag, deleteTag, onUpdateTag};

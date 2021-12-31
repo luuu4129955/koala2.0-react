@@ -15,7 +15,7 @@ type Props = {
 }
 const Tags: React.FC<Props> = (props) => {
   const [tags] = useState<Tag[]>(defaultTags);
-  const {myTags,onFetchTags, onAddTag, onSaveTag, onRemoveTag} = useTags()
+  const {myTags,onFetchTags, onAddTag} = useTags()
   const onSelectTag = (tag: Tag) => {
     props.onChange(tag);
   };
@@ -34,6 +34,7 @@ const Tags: React.FC<Props> = (props) => {
           <li key={tag.id} onClick={() => onSelectTag(tag)}
               className={tag.name === props.value.name ? 'selected' : ''}
           >
+
             <Icon name="myCreate"/>
             <span>{tag.name}</span>
           </li>

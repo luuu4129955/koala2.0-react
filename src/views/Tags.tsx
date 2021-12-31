@@ -2,28 +2,29 @@ import Icon from 'components/Icon';
 import styled from 'styled-components';
 import {useTags} from 'useTags';
 import {Button} from 'components/Button';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 function Tags() {
-  const {myTags} = useTags();
+  const {myTags, onAddTag} = useTags();
   return (
     <TagsSection>
       <div className="topNav">我的自定义标签</div>
       <ul className="tag-list">
-        {myTags.map(t => <li key={t.id}>{t.name}</li>)}
-        <Link to="naicha"><li className="tag">
-          <span>奶茶</span>
-          <Icon name="edit"></Icon>
-        </li>
-        </Link>
+        {myTags.map(t => <Link key={t.id} to={t.id}>
+          <li className="tag">
+            <span>{t.name}</span>
+            <Icon name="edit"></Icon>
+          </li>
+        </Link>)}
+
       </ul>
-      <Button className="add" name="新增标签"></Button>
+      <Button className="add" name="新增标签" onClick={onAddTag}></Button>
     </TagsSection>
   );
 }
 
 const TagsSection = styled.section`
-  
+
   .topNav {
     background-color: #a1dd9d;
     color: #fff;
@@ -59,7 +60,8 @@ const TagsSection = styled.section`
       }
     }
   }
-  .add{
+
+  .add {
     background-color: #ffb850;
   }
 `;

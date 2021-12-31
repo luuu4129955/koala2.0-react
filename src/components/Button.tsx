@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 type Props = {
   name: string
+  className:string
 }
 const Button = (props: Props) => {
   return (
-    <Btn>{props.name}</Btn>
+    <Btn className={props.className}>{props.name}</Btn>
   );
 };
 
-const Btn = styled.button`
+const Btn = styled.div`
   text-align: center;
   margin: 64px 18px 64px 18px;
   padding: 9px 18px;

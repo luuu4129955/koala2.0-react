@@ -17,7 +17,7 @@ function Tags() {
         </li>
         </Link>
       </ul>
-      <Button name="新增标签"></Button>
+      <Button className="add" name="新增标签"></Button>
     </TagsSection>
   );
 }
@@ -58,7 +58,9 @@ const TagsSection = styled.section`
         fill: #a1dd9d
       }
     }
-
+  }
+  .add{
+    background-color: #ffb850;
   }
 `;
 

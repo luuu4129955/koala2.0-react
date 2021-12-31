@@ -36,6 +36,7 @@ const useTags = () => {
     onSaveTag();
     console.log(myTags);
   };
+
   return {myTags, setMyTags, onFetchTags, onAddTag, onSaveTag, onRemoveTag};
 };
 export {useTags};

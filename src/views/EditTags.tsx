@@ -17,10 +17,8 @@ const EditTags: React.FC = () => {
       <FormItemWrapper>
         <FormItem type="text" text="标签名" value="" placeholder="奶茶"></FormItem>
       </FormItemWrapper>
-      <BtnWrapper>
-        <Button name="确认修改"></Button>
-        <Button name="删除标签"></Button>
-      </BtnWrapper>
+        <Button className='confirm' name="确认修改"></Button>
+        <Button className='delete' name="删除标签"></Button>
     </EditTagsSection>
   );
 };
@@ -28,11 +26,15 @@ const EditTags: React.FC = () => {
 const FormItemWrapper = styled.div`
   background-color: #fff;
 `;
-const BtnWrapper=styled.div`
-  background-color:#a2dd9e ;
 
-`
 const EditTagsSection = styled.section`
+  .confirm{
+    background-color:#a2dd9e ;
+  }
+  .delete{
+    background-color: #f76361;
+    margin-top: -50px;
+  }
   .topNav {
     display: flex;
     justify-content: space-between;

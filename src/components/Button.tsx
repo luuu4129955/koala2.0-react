@@ -9,7 +9,7 @@ const Button = (props: Props) => {
   );
 };
 
-const Btn = styled.div`
+const Btn = styled.button`
   text-align: center;
   margin: 64px 18px 64px 18px;
   padding: 9px 18px;

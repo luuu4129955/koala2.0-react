@@ -1,16 +1,22 @@
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import createId from 'lib/createdId';
-
+import {useUpdate} from 'hooks/useUpdate';
 
 type Tag = {
   id: string,
   name: string
 }
 const useTags = () => {
-  const [myTags, setMyTags] = useState<Tag[]>([{id: '111', name: '测试1'}, {id: '222', name: '测试2'}, {
-    id: '333',
-    name: '测试3'
-  }]);
+  const [myTags, setMyTags] = useState<Tag[]>([]);
+
+  useEffect(() => {
+    console.log('didMount');
+    let localTags = JSON.parse(window.localStorage.getItem('tagsList') || '[]');
+    setMyTags(localTags);
+  }, []);//组件挂载后执行
+  useUpdate(() => {
+    window.localStorage.setItem('tagsList', JSON.stringify(myTags));
+  }, [myTags]);
   const id = createId().toString();
   const findTag = (id: string) => myTags.filter(t => t.id === id)[0];
   const findTagIndex = (id: string) => {
@@ -22,21 +28,16 @@ const useTags = () => {
       }
     }
   };
-  const onFetchTags = () => {
-    return window.localStorage.getItem('tagList');
-  };
-  const onSaveTag = () => {
-    window.localStorage.setItem('tagList', JSON.stringify(myTags));
-  };
+
   const deleteTag = () => {
   };
-  const onUpdateTag = (id: string, obj: { name: string }) => {
+  const updateTag = (id: string, obj: { name: string }) => {
     const index = findTagIndex(id);
     const myTagsClone = JSON.parse(JSON.stringify(myTags));
-    myTagsClone.splice(index,1,{id:id,name:obj.name})
-    setMyTags(myTagsClone)
+    myTagsClone.splice(index, 1, {id: id, name: obj.name});
+    setMyTags(myTagsClone);
   };
-  const onAddTag = () => {
+  const addTag = () => {
     let myNewTag: Tag = {id: '', name: ''};
     const text = window.prompt('请输入标签名：');
     if (text !== null) {
@@ -44,17 +45,15 @@ const useTags = () => {
       myNewTag.id = id;
     }
     ;
-    if (!myNewTag) {
+    if (!myNewTag.name) {
       return window.prompt('标签名不能为空！');
-    } else if (myTags.map(t=>t.name).indexOf(myNewTag.name)>=0){
-      return window.alert('标签名重复了')
-    }else if (myNewTag.name.length > 4) {
+    } else if (myTags.map(t => t.name).indexOf(myNewTag.name) >= 0) {
+      return window.alert('标签名重复了');
+    } else if (myNewTag.name.length > 4) {
       return window.prompt('标签名最长4个字符!');
     }
-    setMyTags([...myTags, {id, name: myNewTag.name}]);
-    onSaveTag();
+    setMyTags([...myTags, {id: myNewTag.id, name: myNewTag.name}]);
   };
-
-  return {myTags, setMyTags, onFetchTags, onAddTag, onSaveTag, deleteTag, onUpdateTag};
+  return {myTags, setMyTags, addTag, deleteTag, updateTag};
 };
 export {useTags};

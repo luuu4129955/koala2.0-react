@@ -37,20 +37,10 @@ const TabsSection = styled.section`
       width: 100%;
       padding: 12px 0;
       text-align: center;
-      background-color: #a2dd9e;
-      color: #fff;
+      
       font-size: 20px;
       position: relative;
-
-      &.selected::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: #6e72a4;
-      }
+      
     }
   }
 `;

@@ -15,14 +15,13 @@ type Props = {
 }
 const Tags: React.FC<Props> = (props) => {
   const [tags] = useState<Tag[]>(defaultTags);
-  const {myTags,onFetchTags, onAddTag} = useTags()
+  const {myTags, addTag} = useTags()
   const onSelectTag = (tag: Tag) => {
     props.onChange(tag);
   };
   return (
     <TagsWraper>
       <ul>
-        {/*这里icon占位了但是显示不出来*/}
         {tags.map(tag =>
           <li key={tag.id} onClick={() => onSelectTag(tag)}
               className={tag.name === props.value.name ? 'selected' : ''}
@@ -34,12 +33,11 @@ const Tags: React.FC<Props> = (props) => {
           <li key={tag.id} onClick={() => onSelectTag(tag)}
               className={tag.name === props.value.name ? 'selected' : ''}
           >
-
             <Icon name="myCreate"/>
             <span>{tag.name}</span>
           </li>
         )}
-        <li onClick={onAddTag}><Icon name="add"/><span>自定义</span></li>
+        <li onClick={addTag}><Icon name="add"/><span>自定义</span></li>
       </ul>
     </TagsWraper>
   );
@@ -54,6 +52,8 @@ const TagsWraper = styled.section`
     width: 56px;margin: 1px;
 
     .icon {
+      width: 32px;
+      height: 32px;
       padding: 8px;margin: 0 auto;fill: #888;
     }
 

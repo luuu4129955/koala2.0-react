@@ -18,7 +18,7 @@ const useTags = () => {
     window.localStorage.setItem('tagsList', JSON.stringify(myTags));
   }, [myTags]);
   const id = createId().toString();
-  const findTag = (id: string) => myTags.filter(t => t.id === id)[0];
+  const findTag = (id: string) => myTags.find(t => t.id === id);
   const findTagIndex = (id: string) => {
     let result = -1;
     for (let i = 0; i < myTags.length; i++) {
@@ -31,11 +31,13 @@ const useTags = () => {
 
   const deleteTag = () => {
   };
-  const updateTag = (id: string, obj: { name: string }) => {
-    const index = findTagIndex(id);
-    const myTagsClone = JSON.parse(JSON.stringify(myTags));
-    myTagsClone.splice(index, 1, {id: id, name: obj.name});
-    setMyTags(myTagsClone);
+  const updateTag = (id: string|undefined, obj: { name: string }) => {
+    if (obj.name===null){
+      return window.alert('标签名不能为空！')
+    }else if (obj.name.length>4){
+      return window.alert('标签名最长4个字符！')
+    }
+    setMyTags(myTags.map(t=>t.id===id?{id,name:obj.name}:t))
   };
   const addTag = () => {
     let myNewTag: Tag = {id: '', name: ''};
@@ -54,6 +56,6 @@ const useTags = () => {
     }
     setMyTags([...myTags, {id: myNewTag.id, name: myNewTag.name}]);
   };
-  return {myTags, setMyTags, addTag, deleteTag, updateTag};
+  return {myTags, setMyTags,findTag, addTag, deleteTag, updateTag};
 };
 export {useTags};

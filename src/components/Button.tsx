@@ -1,21 +1,30 @@
+import {MouseEventHandler} from 'react';
 import styled from 'styled-components';
 
 type Props = {
   name: string
-  className:string
-}
-const Button = (props: Props) => {
+  className: string
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
+
+const Button: React.FC<Props> = (props) => {
+  const {name, className, children, ...rest} = props;
   return (
-    <Btn className={props.className}>{props.name}</Btn>
+    <ButtonWrapper className={className}>
+      <button  {...rest}>{name}</ button>
+    </ButtonWrapper>
   );
 };
 
-const Btn = styled.div`
+const ButtonWrapper = styled.div`
   text-align: center;
   margin: 64px 18px 64px 18px;
-  padding: 9px 18px;
   border-radius: 8px;
-  color: #fff;
-  letter-spacing: 6px;
+
+  button {
+    font-size: 16px;
+    padding: 9px 18px;
+    color: #fff;
+    letter-spacing: 6px;
+  }
 `;
 export {Button};

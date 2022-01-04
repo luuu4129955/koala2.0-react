@@ -29,7 +29,8 @@ const useTags = () => {
     }
   };
 
-  const deleteTag = () => {
+  const deleteTag = (id: string|undefined) => {
+    setMyTags(myTags.filter(t=>t.id!==id))
   };
   const updateTag = (id: string|undefined, obj: { name: string }) => {
     if (obj.name===null){

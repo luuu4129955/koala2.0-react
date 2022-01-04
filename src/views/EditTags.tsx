@@ -2,13 +2,14 @@ import {Button} from 'components/Button';
 import Icon from 'components/Icon';
 import FormItem from 'components/Money/FormItem';
 import {useRef} from 'react';
-import {Link, Params, useParams} from 'react-router-dom';
+import {Link, Params, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {useTags} from 'useTags';
 
 const EditTags: React.FC = () => {
   const {myTags,setMyTags, findTag, updateTag, deleteTag} = useTags();
   const refInput = useRef<HTMLInputElement>(null);
+  const navigate=useNavigate()
   let {id} = useParams<Params>();
   let currentName:string|undefined;
   if (id) {
@@ -19,6 +20,9 @@ const EditTags: React.FC = () => {
       updateTag(id,{name:refInput.current.value})
     }
   };
+  const x = () => {
+    deleteTag(id)
+  }
   return (
     <EditTagsSection>
       <div className="topNav">
@@ -33,7 +37,7 @@ const EditTags: React.FC = () => {
         <input type="text" ref={refInput} placeholder={currentName}></input>
       </Wrapper>
       <Button className="confirm" name="确认修改" onClick={changeTagName}></Button>
-      <Button className="delete" name="删除标签" onClick={deleteTag}></Button>
+      <Button className="delete" name="删除标签" onClick={x}></Button>
     </EditTagsSection>
   );
 };

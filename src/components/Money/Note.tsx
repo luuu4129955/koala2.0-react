@@ -1,3 +1,4 @@
+import Icon from 'components/Icon';
 import { useRef } from 'react';
 import styled from 'styled-components';
 import FormItem from './FormItem';
@@ -18,7 +19,7 @@ const Note: React.FC<Props> = (props) => {
   }
   return (
     <Wrapper>
-      <span>备注</span>
+      <Icon name="notes"></Icon>
       <input type="text"  placeholder="在这里添加备注"
                 ref={refInput} onBlur={inputChanged}></input>
     </Wrapper>

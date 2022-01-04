@@ -5,7 +5,7 @@ import {Button} from 'components/Button';
 import {Link} from 'react-router-dom';
 
 function Tags() {
-  const {myTags, onAddTag} = useTags();
+  const {myTags, addTag} = useTags();
   return (
     <TagsSection>
       <div className="topNav">我的自定义标签</div>
@@ -16,9 +16,9 @@ function Tags() {
             <Icon name="edit"></Icon>
           </li>
         </Link>)}
-
       </ul>
-      <Button className="add" name="新增标签" onClick={onAddTag}></Button>
+
+      <Button className="add" name="新增标签" onClick={addTag}></Button>
     </TagsSection>
   );
 }
@@ -34,6 +34,10 @@ const TagsSection = styled.section`
     position: fixed;
     top: 0;
     width: 100%;
+  }
+
+  .message {
+    margin-top: 100px;
   }
 
   .tag-list {

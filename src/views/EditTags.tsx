@@ -1,10 +1,24 @@
 import {Button} from 'components/Button';
 import Icon from 'components/Icon';
 import FormItem from 'components/Money/FormItem';
-import {Link} from 'react-router-dom';
+import {useRef} from 'react';
+import {Link, Params, useParams} from 'react-router-dom';
 import styled from 'styled-components';
+import {useTags} from 'useTags';
 
 const EditTags: React.FC = () => {
+  const {myTags,setMyTags, findTag, updateTag, deleteTag} = useTags();
+  const refInput = useRef<HTMLInputElement>(null);
+  let {id} = useParams<Params>();
+  let currentName:string|undefined;
+  if (id) {
+    currentName = findTag(id)?.name;
+  }
+  const changeTagName = () => {
+    if (refInput.current !== null) {
+      updateTag(id,{name:refInput.current.value})
+    }
+  };
   return (
     <EditTagsSection>
       <div className="topNav">
@@ -14,27 +28,39 @@ const EditTags: React.FC = () => {
         <span>编辑标签</span>
         <span></span>
       </div>
-      <FormItemWrapper>
-        <FormItem type="text" text="标签名" value="" placeholder="奶茶"></FormItem>
-      </FormItemWrapper>
-        <Button className='confirm' name="确认修改"></Button>
-        <Button className='delete' name="删除标签"></Button>
+      <Wrapper>
+        <span>标签名</span>
+        <input type="text" ref={refInput} placeholder={currentName}></input>
+      </Wrapper>
+      <Button className="confirm" name="确认修改" onClick={changeTagName}></Button>
+      <Button className="delete" name="删除标签" onClick={deleteTag}></Button>
     </EditTagsSection>
   );
 };
 
-const FormItemWrapper = styled.div`
+const Wrapper = styled.div`
   background-color: #fff;
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+
+  input {
+    font-size: inherit;
+    padding-left: 16px;
+  }
 `;
 
 const EditTagsSection = styled.section`
-  .confirm{
-    background-color:#a2dd9e ;
+  .confirm {
+    background-color: #a2dd9e;
   }
-  .delete{
+
+  .delete {
+
     background-color: #f76361;
     margin-top: -50px;
   }
+
   .topNav {
     display: flex;
     justify-content: space-between;

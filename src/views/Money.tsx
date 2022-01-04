@@ -4,6 +4,7 @@ import Tabs from 'components/Money/Tabs';
 import Tags from 'components/Money/Tags';
 import {useState} from 'react';
 import {useRecords} from 'hooks/useRecords';
+import styled from 'styled-components';
 
 type Category = '-' | '+'
 
@@ -13,7 +14,7 @@ function Money() {
     note: '',
     category: '-' as Category,
     amount: '0',
-    createdAt:new Date().toISOString()//ISO 8601
+    createdAt: new Date().toISOString()//ISO 8601
   });
   const {records, addRecord} = useRecords();
   const onChange = (obj: Partial<typeof record>) => {
@@ -21,18 +22,33 @@ function Money() {
   };
   const submit = () => {
     addRecord(record);
-    window.alert('保存成功！')
   };
   return (
     <>
       <Tags value={record.tag} onChange={tag => onChange({tag})}></Tags>
       <Note value={record.note} onChange={note => onChange({note})}></Note>
-      <Tabs value={record.category} onChange={category => onChange({category})}></Tabs>
+      <TabsWrapper><Tabs value={record.category} onChange={category => onChange({category})}></Tabs></TabsWrapper>
       <Board value={record.amount} onChange={amount => onChange({amount})}
              onOk={submit}
       ></Board>
     </>
   );
 }
+
+const TabsWrapper=styled.div`
+  li{
+    background-color: #a2dd9e;
+    color: #fff;
+    &.selected::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #6e72a4;
+    }
+  }
+`
 
 export default Money;

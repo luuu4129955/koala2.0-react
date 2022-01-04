@@ -354,7 +354,7 @@ module.exports = function (webpackEnv) {
               use: [
                 {loader: 'svg-sprite-loader', options: {}},
                 {loader: 'svgo-loader', options: {
-                  plugins:[
+                  plplugins:[
                     {removeAttribute:{attributes:'fill'}}
                   ]
                   }}

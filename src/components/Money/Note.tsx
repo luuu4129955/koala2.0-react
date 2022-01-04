@@ -1,20 +1,37 @@
-import { ChangeEventHandler } from 'react';
+import { useRef } from 'react';
+import styled from 'styled-components';
 import FormItem from './FormItem';
 
-type Props={
+type Props = {
   value: string,
-  onChange:(value: string)=>void
+  onChange:(value:string)=>void
 }
 
 const Note: React.FC<Props> = (props) => {
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    props.onChange(e.target.value);
-  };
+  const {value, onChange, ...rest} = props;
+  const refInput = useRef<HTMLInputElement>(null);
+  const inputChanged = () => {
+    if (refInput.current!==null){
+      console.log('xxx了');
+      onChange(refInput.current.value)
+    }
+  }
   return (
-    <>
-      <FormItem type="text" text="备注" placeholder="在这里添加备注" onChange={onChange}></FormItem>
-    </>
+    <Wrapper>
+      <span>备注</span>
+      <input type="text"  placeholder="在这里添加备注"
+                ref={refInput} onBlur={inputChanged}></input>
+    </Wrapper>
   );
 };
 
+const Wrapper=styled.div`
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
+
+  input {
+    font-size: inherit;
+    padding-left: 16px;
+  }`
 export {Note};

@@ -28,7 +28,7 @@ function Money() {
     }
     addRecord(record);
     window.alert('成功保存一笔记账哦~');
-    setRecord({...record, amount: '0'});
+    setRecord({...record, id:createId().toString(),amount: '0'});
   };
   return (
     <>

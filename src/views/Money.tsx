@@ -5,11 +5,13 @@ import Tags from 'components/Money/Tags';
 import {useState} from 'react';
 import {useRecords} from 'hooks/useRecords';
 import styled from 'styled-components';
+import createId from 'lib/createdId';
 
 type Category = '-' | '+'
 
 function Money() {
   const [record, setRecord] = useState({
+    id:createId().toString(),
     tag: {id: 'foods', name: '餐饮'},
     note: '',
     category: '-' as Category,
@@ -35,10 +37,11 @@ function Money() {
   );
 }
 
-const TabsWrapper=styled.div`
-  li{
+const TabsWrapper = styled.div`
+  li {
     background-color: #a2dd9e;
     color: #fff;
+
     &.selected::after {
       content: '';
       position: absolute;
@@ -49,6 +52,6 @@ const TabsWrapper=styled.div`
       background: #6e72a4;
     }
   }
-`
+`;
 
 export default Money;

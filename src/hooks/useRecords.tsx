@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import {useUpdate} from './useUpdate';
 
 export type RecordItem = {
+  id:string
   tag: { id: string, name: string }
   note: string,
   category: string,
@@ -19,7 +20,9 @@ export const useRecords = () => {
   }, [records]);
   const addRecord = (record: RecordItem) => {
       setRecords([...records, record]);
-
   };
-  return {records, addRecord};
+  const deleteRecord = (id:string) => {
+    setRecords(records.filter(r=>r.id!==id))
+  }
+  return {records, addRecord,deleteRecord};
 };

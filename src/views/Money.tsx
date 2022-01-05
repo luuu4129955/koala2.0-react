@@ -11,7 +11,7 @@ type Category = '-' | '+'
 
 function Money() {
   const [record, setRecord] = useState({
-    id: createId().toString(),
+    id: '',
     tag: {id: 'foods', name: '餐饮'},
     note: '',
     category: '-' as Category,

@@ -8,16 +8,14 @@ type Tag = {
 }
 const useTags = () => {
   const [myTags, setMyTags] = useState<Tag[]>([]);
-
   useEffect(() => {
-    console.log('didMount');
+
     let localTags = JSON.parse(window.localStorage.getItem('tagsList') || '[]');
     setMyTags(localTags);
   }, []);//组件挂载后执行
   useUpdate(() => {
     window.localStorage.setItem('tagsList', JSON.stringify(myTags));
   }, [myTags]);
-  const id = createId().toString();
   const findTag = (id: string) => myTags.find(t => t.id === id);
   const findTagIndex = (id: string) => {
     let result = -1;
@@ -45,7 +43,7 @@ const useTags = () => {
     const text = window.prompt('请输入标签名：');
     if (text !== null) {
       myNewTag.name = text;
-      myNewTag.id = id;
+      myNewTag.id = createId().toString();
     }
     ;
     if (!myNewTag.name) {

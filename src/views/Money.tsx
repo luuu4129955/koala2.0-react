@@ -11,7 +11,7 @@ type Category = '-' | '+'
 
 function Money() {
   const [record, setRecord] = useState({
-    id:createId().toString(),
+    id: createId().toString(),
     tag: {id: 'foods', name: '餐饮'},
     note: '',
     category: '-' as Category,
@@ -23,7 +23,12 @@ function Money() {
     setRecord({...record, ...obj});
   };
   const submit = () => {
+    if (record.amount === '0') {
+      return window.alert('金额不能为0哦！');
+    }
     addRecord(record);
+    window.alert('成功保存一笔记账哦~');
+    setRecord({...record, amount: '0'});
   };
   return (
     <>

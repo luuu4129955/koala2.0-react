@@ -4,6 +4,7 @@ import {RecordItem, useRecords} from 'hooks/useRecords';
 import {useState} from 'react';
 import styled from 'styled-components';
 import day from 'dayjs';
+import { Echarts } from 'components/Charts';
 
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-');
@@ -30,6 +31,7 @@ function Statistics() {
       <TabsWrapper>
         <Tabs value={category} onChange={value => setCategory(value)}></Tabs>
       </TabsWrapper>
+      <Echarts></Echarts>
       {array.map(([date, records]) => <div key={date}>
         <DateTitle>{date}</DateTitle>
         {records.map(r => {

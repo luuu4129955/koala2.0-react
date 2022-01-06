@@ -11,7 +11,7 @@ type Category = '-' | '+'
 
 function Money() {
   const [record, setRecord] = useState({
-    id: '0',
+    id: window.localStorage.getItem('_idMax' )||'0',
     tag: {id: 'foods', name: '餐饮'},
     note: '',
     category: '-' as Category,

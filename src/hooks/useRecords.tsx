@@ -10,6 +10,7 @@ export type RecordItem = {
   amount: string,
   createdAt: string
 }
+type RecordText=Omit<RecordItem, 'id'>
 export const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
   useEffect(()=>{
@@ -19,8 +20,8 @@ export const useRecords = () => {
   useUpdate(() => {
     window.localStorage.setItem('recordsList', JSON.stringify(records));
   }, [records]);
-  const addRecord = (record: RecordItem) => {
-      setRecords([...records, record]);
+  const addRecord = (record:RecordText) => {
+      setRecords([...records, {id:createId.toString(),...record}]);
   };
   const deleteRecord = (id:string) => {
     setRecords(records.filter(r=>r.id!==id))

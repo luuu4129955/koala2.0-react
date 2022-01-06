@@ -31,10 +31,10 @@ function Statistics() {
       <TabsWrapper>
         <Tabs value={category} onChange={value => setCategory(value)}></Tabs>
       </TabsWrapper>
-      {array.map(([date, records]) => <div >
+      {array.map(([date, records]) => <div key={date}>
         <DateTitle>{date}</DateTitle>
         {records.map(r => {
-          return <ListWrapper key={r.tag.id}>
+          return <ListWrapper key={r.id}>
             <li>
               <Icon name={isNaN(parseInt(r.tag.id)) ? r.tag.id : 'myCreate'}></Icon>
               <span className="tag">{r.tag.name}</span>

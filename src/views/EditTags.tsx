@@ -1,6 +1,5 @@
 import {Button} from 'components/Button';
 import Icon from 'components/Icon';
-import FormItem from 'components/Money/FormItem';
 import {useRef} from 'react';
 import {Link, Params, useNavigate, useParams} from 'react-router-dom';
 import styled from 'styled-components';

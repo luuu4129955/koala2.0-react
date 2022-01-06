@@ -1,7 +1,6 @@
 import Icon from 'components/Icon';
 import { useRef } from 'react';
 import styled from 'styled-components';
-import FormItem from './FormItem';
 
 type Props = {
   value: string,
@@ -13,7 +12,6 @@ const Note: React.FC<Props> = (props) => {
   const refInput = useRef<HTMLInputElement>(null);
   const inputChanged = () => {
     if (refInput.current!==null){
-      console.log('xxx了');
       onChange(refInput.current.value)
     }
   }

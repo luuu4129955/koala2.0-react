@@ -52,8 +52,8 @@ const TagsWraper = styled.section`
     width: 56px;margin: 1px;
 
     .icon {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       padding: 8px;margin: 0 auto;fill: #888;
     }
 

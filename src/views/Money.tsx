@@ -6,12 +6,14 @@ import {useState} from 'react';
 import {useRecords} from 'hooks/useRecords';
 import styled from 'styled-components';
 import createId from 'lib/createdId';
+import {DateInput} from 'components/Money/Date';
+import day from 'dayjs';
 
 type Category = '-' | '+'
 
 function Money() {
   const [record, setRecord] = useState({
-    id: window.localStorage.getItem('_idMax' )||'0',
+    id: window.localStorage.getItem('_idMax') || '0',
     tag: {id: 'foods', name: '餐饮'},
     note: '',
     category: '-' as Category,
@@ -28,16 +30,18 @@ function Money() {
     }
     addRecord(record);
     window.alert('成功保存一笔记账哦~');
-    setRecord({...record, id:createId().toString(),amount: '0'});
+    setRecord({...record, id: createId().toString(), amount: '0'});
   };
   return (
     <>
       <Tags value={record.tag} onChange={tag => onChange({tag})}></Tags>
-      <Note value={record.note} onChange={note => onChange({note})}></Note>
-      <TabsWrapper><Tabs value={record.category} onChange={category => onChange({category})}></Tabs></TabsWrapper>
-      <Board value={record.amount} onChange={amount => onChange({amount})}
-             onOk={submit}
-      ></Board>
+      <InputWrapper>
+        <DateInput value={record.createdAt} onChange={createdAt => onChange({createdAt})}></DateInput>
+        <Note value={record.note} onChange={note => onChange({note})}></Note>
+      </InputWrapper>
+      <TabsWrapper>
+        <Tabs value={record.category} onChange={category => onChange({category})}></Tabs></TabsWrapper>
+      <Board value={record.amount} onChange={amount => onChange({amount})} onOk={submit}></Board>
     </>
   );
 }
@@ -58,5 +62,7 @@ const TabsWrapper = styled.div`
     }
   }
 `;
-
+const InputWrapper=styled.div`
+display: flex;
+`
 export default Money;

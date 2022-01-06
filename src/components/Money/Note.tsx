@@ -18,7 +18,7 @@ const Note: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <Icon name="notes"></Icon>
-      <input type="text"  placeholder="在这里添加备注"
+      <input type="text"  placeholder="添加备注~"
                 ref={refInput} onBlur={inputChanged}></input>
     </Wrapper>
   );

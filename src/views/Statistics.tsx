@@ -8,6 +8,59 @@ import { Echarts } from 'components/Charts';
 
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-');
+  const [option,setOption]=useState<echarts.EChartOption>({
+    legend: {},
+    tooltip: {},
+    dataset: {
+      source: [
+        ['年月', '支出', '收入'],
+
+        ['2021.06', 6500, 20000],
+        ['2021.07', 6599, 0],
+        ['2021.09', 10000, 18000],
+        ['2021.10', 4800, 15000],
+        ['2021.11', 2000, 13000],
+        ['2021.12', 8000, 16000],
+        ['2022.01', 15000, 6200]
+      ]
+    },
+    xAxis: [
+      {
+        type: 'category',
+        axisLine: { lineStyle: { color: '#E1E2E6' } },
+        axisLabel:{
+          color:'#51c638',
+          fontSize:12,
+
+        }
+      },
+      {
+        data: [
+          '￥200\n￥1000',
+          '￥1000\n￥300',
+          '￥1000\n￥300',
+          '￥1000\n￥300',
+          '￥1000\n￥300',
+          '￥1000\n￥300',
+          '￥1000\n￥300'
+        ],
+        axisLine: { lineStyle: { color: '#E1E2E6' } }
+      }
+    ],
+    yAxis: {type: 'value', show: false},
+    series: [
+      {
+        type: 'bar',
+        itemStyle: { color: '#3c4469', borderRadius: [5, 5, 0, 0] },
+        barMaxWidth: 10
+      },
+      {
+        type: 'bar',
+        itemStyle: { color: '#0099D5', borderRadius: [5, 5, 0, 0] },
+        barMaxWidth: 10
+      }
+    ]
+  })
   const {records,deleteRecord} = useRecords();
   const hash: { [K: string]: RecordItem[] } = {};
   const selectedRecords = records.filter(r => r.category === category);
@@ -31,7 +84,7 @@ function Statistics() {
       <TabsWrapper>
         <Tabs value={category} onChange={value => setCategory(value)}></Tabs>
       </TabsWrapper>
-      <Echarts></Echarts>
+      <Echarts option={option}></Echarts>
       {array.map(([date, records]) => <div key={date}>
         <DateTitle>{date}</DateTitle>
         {records.map(r => {

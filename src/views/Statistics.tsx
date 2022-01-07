@@ -11,6 +11,7 @@ function Statistics() {
   const [option,setOption]=useState<echarts.EChartOption>({
     legend: {},
     tooltip: {},
+    grid:{left:0,right:0},//去掉左右的padding
     dataset: {
       source: [
         ['年月', '支出', '收入'],
@@ -30,7 +31,7 @@ function Statistics() {
         axisLine: { lineStyle: { color: '#E1E2E6' } },
         axisLabel:{
           color:'#51c638',
-          fontSize:12,
+          fontSize:6,
 
         }
       },
@@ -99,9 +100,7 @@ function Statistics() {
           </ListWrapper>;
         })}
       </div>)}
-      <div>
 
-      </div>
     </>
   );
 }
@@ -112,6 +111,7 @@ const TabsWrapper = styled.div`
     &.selected {background-color: #a4de9f;}
   }
 `;
+
 const DateTitle=styled.h3`
   color: #3C4469;
   background-color: #eeffed;

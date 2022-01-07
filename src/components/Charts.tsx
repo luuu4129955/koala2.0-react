@@ -1,5 +1,6 @@
 import echarts from 'echarts'
 import {useEffect, useRef } from 'react'
+import styled from 'styled-components'
 
 type Props={
   option:echarts.EChartOption
@@ -20,8 +21,10 @@ const Echarts:React.FC<Props> =(props)=>{
     chart.current.setOption(option)
   },[option])
   return(
-    <div ref={container}></div>
+    <Wrapper ref={container}></Wrapper>
   )
 }
-
+const Wrapper=styled.div`
+  
+`
 export {Echarts}

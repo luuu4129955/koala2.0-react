@@ -1,7 +1,7 @@
 import Icon from 'components/Icon';
 import styled from 'styled-components';
 import day from 'dayjs';
-import {ChangeEventHandler, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 type Props = {
   value: string
@@ -13,7 +13,7 @@ const DateInput: React.FC<Props> = (props) => {
   useEffect(()=>{onChange(date)},[date])
   return (
     <Wrapper>
-      <Icon name="date"></Icon>
+      <Icon name="date"/>
       <input type="date" id="start" name="trip-start"
              value={day(date).format('YYYY-MM-DD')}
              max={day(new Date().toString()).format('YYYY-MM-DD')}

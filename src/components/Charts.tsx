@@ -25,6 +25,5 @@ const Echarts:React.FC<Props> =(props)=>{
   )
 }
 const Wrapper=styled.div`
-  
 `
 export {Echarts}

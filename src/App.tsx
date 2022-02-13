@@ -8,6 +8,7 @@ import Statistics from 'views/Statistics';
 import Tags from 'views/Tags';
 
 export default function App() {
+  console.log('render了')
   return (
     <div>
       <Routes>

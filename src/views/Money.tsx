@@ -18,9 +18,9 @@ function Money() {
     note: '',
     category: '-' as Category,
     amount: '0',
-    createdAt: new Date().toISOString()//ISO 8601
+    createdAt: day(new Date().toISOString()).format('YYYY-MM-DD')//ISO 8601
   });
-  const {records, addRecord} = useRecords();
+  const {addRecord} = useRecords();
   const onChange = (obj: Partial<typeof record>) => {
     setRecord({...record, ...obj});
   };
@@ -34,14 +34,14 @@ function Money() {
   };
   return (
     <>
-      <Tags value={record.tag} onChange={tag => onChange({tag})}></Tags>
+      <Tags value={record.tag} onChange={tag => onChange({tag})}/>
       <InputWrapper>
-        <DateInput value={record.createdAt} onChange={createdAt => onChange({createdAt})}></DateInput>
-        <Note value={record.note} onChange={note => onChange({note})}></Note>
+        <DateInput value={record.createdAt} onChange={createdAt => onChange({createdAt})}/>
+        <Note value={record.note} onChange={note => onChange({note})}/>
       </InputWrapper>
       <TabsWrapper>
-        <Tabs value={record.category} onChange={category => onChange({category})}></Tabs></TabsWrapper>
-      <Board value={record.amount} onChange={amount => onChange({amount})} onOk={submit}></Board>
+        <Tabs value={record.category} onChange={category => onChange({category})}/></TabsWrapper>
+      <Board value={record.amount} onChange={amount => onChange({amount})} onOk={submit}/>
     </>
   );
 }

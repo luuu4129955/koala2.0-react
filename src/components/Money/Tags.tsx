@@ -1,5 +1,5 @@
 import Icon from 'components/Icon';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import 'lib/constant';
 import defaultTags from 'lib/constant';
@@ -48,7 +48,6 @@ const TagsWrapper = styled.section`
   flex-grow: 1;overflow: auto;background-color: #fff;
 
   .tags-list {
-    max-width: 500px;
     display: flex;
     flex-wrap: wrap;
   }
@@ -73,7 +72,7 @@ const TagsWrapper = styled.section`
   }
 
   div.selected {
-    border-radius: 50%;background-color: #eeffed;
+    border-radius: 12%;background-color: #eeffed;
     display: inline-flex;
     flex-direction: column;
     flex: 0 0 20%;

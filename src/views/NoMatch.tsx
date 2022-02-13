@@ -9,7 +9,6 @@ function NoMatch(props:Props) {
     <>
       <h2>404 Not Found</h2>
       <Link to="/">Go to the home page</Link>
-      {props.path}
     </>
   );
 }

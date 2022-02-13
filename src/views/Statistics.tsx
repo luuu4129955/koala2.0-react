@@ -4,14 +4,14 @@ import {RecordItem, useRecords} from 'hooks/useRecords';
 import {useState} from 'react';
 import styled from 'styled-components';
 import day from 'dayjs';
-import { Echarts } from 'components/Charts';
+import {Echarts} from 'components/Charts';
 
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-');
-  const [option,setOption]=useState<echarts.EChartOption>({
+  const [option] = useState<echarts.EChartOption>({
     legend: {},
     tooltip: {},
-    grid:{left:0,right:0},//去掉左右的padding
+    grid: {left: 0, right: 0},//去掉左右的padding
     dataset: {
       source: [
         ['年月', '支出', '收入'],
@@ -28,11 +28,10 @@ function Statistics() {
     xAxis: [
       {
         type: 'category',
-        axisLine: { lineStyle: { color: '#E1E2E6' } },
-        axisLabel:{
-          color:'#51c638',
-          fontSize:6,
-
+        axisLine: {lineStyle: {color: '#E1E2E6'}},
+        axisLabel: {
+          color: '#3c4469',
+          fontSize: 6,
         }
       },
       {
@@ -45,24 +44,28 @@ function Statistics() {
           '￥1000\n￥300',
           '￥1000\n￥300'
         ],
-        axisLine: { lineStyle: { color: '#E1E2E6' } }
+        axisLine: {lineStyle: {color: '#E1E2E6'}},
+        axisLabel: {
+          color: '#3c4469',
+          fontSize: 6,
+        }
       }
     ],
     yAxis: {type: 'value', show: false},
     series: [
       {
         type: 'bar',
-        itemStyle: { color: '#3c4469', borderRadius: [5, 5, 0, 0] },
+        itemStyle: {color: '#3c4469', barBorderRadius: [5, 5, 0, 0]},
         barMaxWidth: 10
       },
       {
         type: 'bar',
-        itemStyle: { color: '#0099D5', borderRadius: [5, 5, 0, 0] },
+        itemStyle: {color: '#0099D5', barBorderRadius: [5, 5, 0, 0]},
         barMaxWidth: 10
       }
     ]
-  })
-  const {records,deleteRecord} = useRecords();
+  });
+  const {records, deleteRecord} = useRecords();
   const hash: { [K: string]: RecordItem[] } = {};
   const selectedRecords = records.filter(r => r.category === category);
   selectedRecords.map(r => {
@@ -72,6 +75,34 @@ function Statistics() {
     }
     hash[key].push(r);
   });
+
+  //按年月 统计
+  const incomeHash: { [K: string]: number } = {};
+  // 相同的年月的 收入
+  const outcomeHash: { [K: string]: number } = {};
+
+  const income = records.filter(r => r.category === '+');
+  income.map(i => {
+    const key = day(i.createdAt).format('YYYY.MM');
+    if (!(key in incomeHash)) {
+      incomeHash[key] = 0;
+    }
+    incomeHash[key] += parseFloat(i.amount);
+  });
+
+  const outcome = records.filter(r => r.category === '-');
+  outcome.map(o => {
+    const key = day(o.createdAt).format('YYYY.MM');
+    if (!(key in outcomeHash)) {
+      outcomeHash[key] = 0;
+    }
+    outcomeHash[key] += parseFloat(o.amount);
+  });
+
+  const dataSource = Object.entries(incomeHash)[0];
+  console.log(dataSource);
+  console.log(Object.entries(outcomeHash));
+
 
   const array = Object.entries(hash).sort((a, b) => {
     if (a[0] === b[0]) return 0;
@@ -83,19 +114,19 @@ function Statistics() {
   return (
     <>
       <TabsWrapper>
-        <Tabs value={category} onChange={value => setCategory(value)}></Tabs>
+        <Tabs value={category} onChange={value => setCategory(value)}/>
       </TabsWrapper>
-      <Echarts option={option}></Echarts>
+      <Echarts option={option}/>
       {array.map(([date, records]) => <div key={date}>
         <DateTitle>{date}</DateTitle>
         {records.map(r => {
           return <ListWrapper key={r.id}>
             <li>
-              <Icon name={isNaN(parseInt(r.tag.id)) ? r.tag.id : 'myCreate'}></Icon>
+              <Icon name={isNaN(parseInt(r.tag.id)) ? r.tag.id : 'myCreate'}/>
               <span className="tag">{r.tag.name}</span>
               <span className="note">{r.note}</span>
               <span>￥{r.amount}</span>
-              <span className="delete" onClick={()=>deleteRecord(r.id)}>删除</span>
+              <span className="delete" onClick={() => deleteRecord(r.id)}>删除</span>
             </li>
           </ListWrapper>;
         })}
@@ -112,14 +143,13 @@ const TabsWrapper = styled.div`
   }
 `;
 
-const DateTitle=styled.h3`
+const DateTitle = styled.h3`
   color: #3C4469;
   background-color: #eeffed;
-  padding: 2px 16px;
   padding: 8px 16px;
-`
+`;
 const ListWrapper = styled.ol`
-   li {
+  li {
     background-color: #fff;
     font-size: 14px;
     border-bottom: 1px solid #e3dfdf;
@@ -134,7 +164,7 @@ const ListWrapper = styled.ol`
 
     .notes {margin-right: auto; margin-left: 16px;}
 
-    .icon {width: 20px;fill: #3C4469;margin-right: 16px;}
+    .icon {width: 20px;height: 2em;fill: #3C4469;margin-right: 16px;}
 
     .delete {color: red;}
   }
